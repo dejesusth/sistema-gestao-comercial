@@ -26,4 +26,39 @@ public class ProdutosController : ControllerBase
             return NotFound();
         return Ok(produto);
     }
+
+    // POST: api/produtos
+    [HttpPost]
+    public IActionResult Create([FromBody] Produto produto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var criado = _service.Create(produto);
+        return CreatedAtAction(nameof(GetById), new { id = criado.Id }, criado);
+    }
+
+    // PUT: api/produtos/{id}
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, [FromBody] Produto produto)
+    {
+        var atualizado = _service.Update(id, produto);
+
+        if (atualizado == null)
+            return NotFound();
+
+        return Ok(atualizado);
+    }
+
+    // DELETE: api/produtos/{id}
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var deletado = _service.Delete(id);
+
+        if (!deletado)
+            return NotFound();
+
+        return NoContent();
+    }
 }
