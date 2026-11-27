@@ -1,10 +1,15 @@
-var builder = WebApplication.CreateBuilder(args);
+using GestaoComercial.Api.Repositories;
+using GestaoComercial.Api.Services;
 
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
 var app = builder.Build();
 
