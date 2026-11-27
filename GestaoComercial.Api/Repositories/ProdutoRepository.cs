@@ -65,7 +65,7 @@ public class ProdutoRepository : IProdutoRepository
         conn.Open();
 
         string sql = @"INSERT INTO produtos (nome, preco, estoque, ativo)
-                       VALUES (@Nome, @Preco, @Estoque, @Ativo)
+                       VALUES (@Nome, @Preco, @Estoque, @Ativo);
                        SELECT LAST_INSERT_ID();";
 
         using var cmd = new MySqlCommand(sql, conn);
